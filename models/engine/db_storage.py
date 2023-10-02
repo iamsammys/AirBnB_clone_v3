@@ -79,6 +79,8 @@ class DBStorage:
         """
         Returns a cls instance
         """
+        if cls not in classes.values():
+            return None
         objs = self.all(cls)
         key = "{}.{}".format(cls.__name__, id)
         if key in objs.keys():
@@ -89,4 +91,6 @@ class DBStorage:
     def count(self, cls=None):
         """Returns the count of objects based on class if cls
         """
+        if cls not in classes.values():
+            return None
         return(len(self.all(cls)))

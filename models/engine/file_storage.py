@@ -76,15 +76,19 @@ class FileStorage:
         Returns:
             obj: an instance of cls
         """
+        if cls not in classes.values():
+            return None
         key = "{}.{}".format(cls.__name__, id)
-        if key in FileStorage.__objects.keys():
-            return FileStorage.__objects[key]
+        if key in self.all().keys():
+            return self.all()[key]
         else:
             return None
 
     def count(self, cls=None):
         """Returns the count of the objects in the class
         """
+        if cls not in classes.values():
+            return None
         if cls:
             return len(self.all(cls))
         else:
